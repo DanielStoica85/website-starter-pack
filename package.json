@@ -1,0 +1,23 @@
+{
+  "name": "website-starter-pack",
+  "version": "1.0.0",
+  "description": "Starter pack for building websites using gulp & postcss.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gulp",
+    "postcss",
+    "web",
+    "development"
+  ],
+  "author": "Daniel Stoica",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.1"
+  }
+}
