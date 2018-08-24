@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
+const concat = require('gulp-concat');
 
 // Copy all html files
 gulp.task('copyHtml', () => {
@@ -31,7 +32,7 @@ gulp.task('sass', () => {
 });
 
 // Concatenate all scripts - do not run minifyJs if you use this
-gulp.task('scripts', () => {
+gulp.task('concatJs', () => {
     gulp.src('src/js/*.js')
         .pipe(concat('main.js'))
         .pipe(uglify())
@@ -39,13 +40,13 @@ gulp.task('scripts', () => {
 });
 
 // Run all tasks in one -> build production website
-gulp.task('default', ['copyHtml', 'imageMin', 'sass', 'minifyJs']);
+gulp.task('default', ['copyHtml', 'imageMin', 'sass', 'concatJs']);
 
 // Watch
 gulp.task('watch', () => {
     // enable this if you have multiple scripts
-    // gulp.watch('src/js/*.js', ['scripts']);
-    gulp.watch('src/js/*.js', ['minifyJs']);
+    gulp.watch('src/js/*.js', ['concatJs']);
+    // gulp.watch('src/js/*.js', ['minifyJs']);
     gulp.watch('src/images/*', ['imageMin']);
     gulp.watch('src/sass/*.scss', ['sass']);
     gulp.watch('src/*.html', ['copyHtml']);
