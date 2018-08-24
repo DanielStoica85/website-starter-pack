@@ -30,7 +30,7 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('dist/css'))
 });
 
-// concatenate all scripts - do not run minifyJs if you use this
+// Concatenate all scripts - do not run minifyJs if you use this
 gulp.task('scripts', () => {
     gulp.src('src/js/*.js')
         .pipe(concat('main.js'))
@@ -38,5 +38,15 @@ gulp.task('scripts', () => {
         .pipe(gulp.dest('dist/js'))
 });
 
-// Run all tasks in one
+// Run all tasks in one -> build production website
 gulp.task('default', ['copyHtml', 'imageMin', 'sass', 'minifyJs']);
+
+// Watch
+gulp.task('watch', () => {
+    // enable this if you have multiple scripts
+    // gulp.watch('src/js/*.js', ['scripts']);
+    gulp.watch('src/js/*.js', ['minifyJs']);
+    gulp.watch('src/images/*', ['imageMin']);
+    gulp.watch('src/sass/*.scss', ['sass']);
+    gulp.watch('src/*.html', ['copyHtml']);
+});
