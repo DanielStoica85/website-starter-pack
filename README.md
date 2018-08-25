@@ -8,7 +8,7 @@
 
 ### Requirements
 
-* Node (which can be installed from [here] (http://nodejs.org/download/)) and already includes [npm](https://www.npmjs.com/get-npm)
+* Node (which can be installed from [here](http://nodejs.org/download/)) and already includes [npm](https://www.npmjs.com/get-npm)
 * Global installation of [gulp](https://gulpjs.com/), a toolkit for automating painful or time-consuming tasks in your development workflow, so you can stop messing around and build something:
 ```bash
 npm install -g gulp
@@ -27,7 +27,7 @@ npm install
 
 And you're all set!
 
-------
+---
 
 ## List of available tasks
 
