@@ -1,8 +1,19 @@
+// Main tools
+const postcss = require('gulp-postcss');
 const gulp = require('gulp');
+
+// Gulp tools
 const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
+
+// PostCss tools
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const rucksack = require('rucksack-css');
+
+// TASKS
 
 // Copy all html files
 gulp.task('copyHtml', () => {
@@ -24,11 +35,18 @@ gulp.task('minifyJs', () => {
         .pipe(gulp.dest('dist/js'))
 });
 
-// Compile Sass
-gulp.task('sass', () => {
-    gulp.src('src/sass/*.scss')
+// Compile Sass and process resulting CSS
+gulp.task('css', () => {
+    const processors = [
+        // PostCSS plugins
+        rucksack,
+        autoprefixer({ browsers: ['last 4 versions']}),
+        cssnano(),
+        ];
+    return gulp.src('./src/sass/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('dist/css'))
+        .pipe(postcss(processors))
+        .pipe(gulp.dest('./dist/css'));
 });
 
 // Concatenate all scripts - do not run minifyJs if you use this
@@ -40,7 +58,7 @@ gulp.task('concatJs', () => {
 });
 
 // Run all tasks in one -> build production website
-gulp.task('default', ['copyHtml', 'imageMin', 'sass', 'concatJs']);
+gulp.task('default', ['copyHtml', 'imageMin', 'css', 'concatJs']);
 
 // Watch
 gulp.task('watch', () => {
@@ -48,6 +66,6 @@ gulp.task('watch', () => {
     gulp.watch('src/js/*.js', ['concatJs']);
     // gulp.watch('src/js/*.js', ['minifyJs']);
     gulp.watch('src/images/*', ['imageMin']);
-    gulp.watch('src/sass/*.scss', ['sass']);
+    gulp.watch('src/sass/*.scss', ['css']);
     gulp.watch('src/*.html', ['copyHtml']);
 });
