@@ -27,7 +27,9 @@ npm install
 
 And you're all set!
 
-### List of available tasks
+------
+
+## List of available tasks
 
 #### `gulp copyHtml`
 Copy html files from `src` folder to `dist` folder.
